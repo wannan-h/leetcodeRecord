@@ -6,7 +6,6 @@
 #define LEETCODERECORD_NO_414_H
 
 #include "../bits/stdc++.h"
-
 using  namespace  std;
 
 class Solution {

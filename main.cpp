@@ -1,7 +1,8 @@
-#include "No/No_414.h"
+#include "No725.h"
 
 using namespace std;
 
-int main(){
-    Solution solution;
+
+int main() {
+    test();
 }
