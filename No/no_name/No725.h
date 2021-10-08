@@ -5,7 +5,7 @@
 #ifndef LEETCODERECORD_NO725_H
 #define LEETCODERECORD_NO725_H
 
-#include "../bits/stdc++.h"
+#include "stdc++.h"
 
 struct ListNode {
     int val;

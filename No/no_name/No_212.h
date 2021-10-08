@@ -5,7 +5,7 @@
 #ifndef LEETCODERECORD_NO_212_H
 #define LEETCODERECORD_NO_212_H
 
-#include "../bits/stdc++.h"
+#include "stdc++.h"
 
 using namespace std;
 

@@ -5,7 +5,7 @@
 #ifndef LEETCODERECORD_NO583_H
 #define LEETCODERECORD_NO583_H
 
-#include "../bits/stdc++.h"
+#include "stdc++.h"
 
 using namespace std;
 //"sea", "eat"

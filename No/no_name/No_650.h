@@ -10,7 +10,7 @@
 //
 // Created by 黄嘉强 on 2021/10/6.
 //
-#include "../bits/stdc++.h"
+#include "stdc++.h"
 using  namespace  std;
 class Solution {
 public:

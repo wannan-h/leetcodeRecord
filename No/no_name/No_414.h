@@ -5,7 +5,7 @@
 #ifndef LEETCODERECORD_NO_414_H
 #define LEETCODERECORD_NO_414_H
 
-#include "../bits/stdc++.h"
+#include "stdc++.h"
 using  namespace  std;
 
 class Solution {
