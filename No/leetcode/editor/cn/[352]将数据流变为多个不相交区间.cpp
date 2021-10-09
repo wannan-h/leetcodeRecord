@@ -55,7 +55,7 @@
 // 👍 88 👎 0
 
 
-#include "../bits/stdc++.h"
+#include "stdc++.h"
 //leetcode submit region begin(Prohibit modification and deletion)
 class SummaryRanges {
 public:
