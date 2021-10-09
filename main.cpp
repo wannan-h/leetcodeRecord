@@ -4,7 +4,15 @@
 
 using namespace std;
 
+class t{
+public:
+    int a ;
+    int b;
+    virtual void foo(){}
+};
 
 int main(){
-    test();
+    t x;
+    cout << sizeof(t) << endl;
+    cout << offsetof(t, a);
 };
