@@ -1,90 +1,96 @@
-//给你一个由非负整数 a1, a2, ..., an 组成的数据流输入，请你将到目前为止看到的数字总结为不相交的区间列表。 
+//Given a data stream input of non-negative integers a1, a2, ..., an, summarize 
+//the numbers seen so far as a list of disjoint intervals. 
 //
-// 实现 SummaryRanges 类： 
-//
-// 
-// 
-// 
-// SummaryRanges() 使用一个空数据流初始化对象。 
-// void addNum(int val) 向数据流中加入整数 val 。 
-// int[][] getIntervals() 以不相交区间 [starti, endi] 的列表形式返回对数据流中整数的总结。 
-// 
+// Implement the SummaryRanges class: 
 //
 // 
-//
-// 示例： 
+// SummaryRanges() Initializes the object with an empty stream. 
+// void addNum(int val) Adds the integer val to the stream. 
+// int[][] getIntervals() Returns a summary of the integers in the stream curren
+//tly as a list of disjoint intervals [starti, endi]. 
+// 
 //
 // 
-//输入：
+// Example 1: 
+//
+// 
+//Input
 //["SummaryRanges", "addNum", "getIntervals", "addNum", "getIntervals", "addNum"
 //, "getIntervals", "addNum", "getIntervals", "addNum", "getIntervals"]
 //[[], [1], [], [3], [], [7], [], [2], [], [6], []]
-//输出：
+//Output
 //[null, null, [[1, 1]], null, [[1, 1], [3, 3]], null, [[1, 1], [3, 3], [7, 7]],
 // null, [[1, 3], [7, 7]], null, [[1, 3], [6, 7]]]
 //
-//解释：
+//Explanation
 //SummaryRanges summaryRanges = new SummaryRanges();
 //summaryRanges.addNum(1);      // arr = [1]
-//summaryRanges.getIntervals(); // 返回 [[1, 1]]
+//summaryRanges.getIntervals(); // return [[1, 1]]
 //summaryRanges.addNum(3);      // arr = [1, 3]
-//summaryRanges.getIntervals(); // 返回 [[1, 1], [3, 3]]
+//summaryRanges.getIntervals(); // return [[1, 1], [3, 3]]
 //summaryRanges.addNum(7);      // arr = [1, 3, 7]
-//summaryRanges.getIntervals(); // 返回 [[1, 1], [3, 3], [7, 7]]
+//summaryRanges.getIntervals(); // return [[1, 1], [3, 3], [7, 7]]
 //summaryRanges.addNum(2);      // arr = [1, 2, 3, 7]
-//summaryRanges.getIntervals(); // 返回 [[1, 3], [7, 7]]
+//summaryRanges.getIntervals(); // return [[1, 3], [7, 7]]
 //summaryRanges.addNum(6);      // arr = [1, 2, 3, 6, 7]
-//summaryRanges.getIntervals(); // 返回 [[1, 3], [6, 7]]
+//summaryRanges.getIntervals(); // return [[1, 3], [6, 7]]
 // 
 //
 // 
-//
-// 提示： 
+// Constraints: 
 //
 // 
 // 0 <= val <= 104 
-// 最多调用 addNum 和 getIntervals 方法 3 * 104 次 
-// 
-// 
+// At most 3 * 104 calls will be made to addNum and getIntervals. 
 // 
 //
 // 
-//
-// 进阶：如果存在大量合并，并且与数据流的大小相比，不相交区间的数量很小，该怎么办? 
-// Related Topics 设计 二分查找 有序集合 
-// 👍 88 👎 0
 
 
-#include "stdc++.h"
+#include "../bits/stdc++.h"
+
 //leetcode submit region begin(Prohibit modification and deletion)
 class SummaryRanges {
 public:
-    list<int> l;
+    vector<vector<int>> its;
     SummaryRanges() {
+    }
+    
+    void addNum(int v) {
+        int n = its.size();
+        if(n == 0){
+            its.push_back({v, v});
+        }
+        int l = 0, r = n - 1;
+        int m;
+        while(l < r){
+            m = (r + l + 1) >> 1;
+            if(its[m] <= val){
+                l = m;
+            }else{
+                r = m - 1;
+            }
+        }
+        int pre = r, next = r + 1;
+        if((pre[0] >= v && pre[1] <= v)||(next[0] >= v && next[1] <= v)){
+            //元素已存在
+        }else if(pre[1] + 1 == v && next[0] - 1 == v){
+            its[pre][1] = 0;
+        }
+
+        if(its[pre][1] == its[pre][0]){
+
+        }else if(its[next][1])
+
 
     }
-
-    void addNum(int val) {
-
-    }
-
+    
     vector<vector<int>> getIntervals() {
 
     }
 };
 
 /**
- * Your SummaryRanges object will be instantiated and called as such:
- * SummaryRanges* obj = new SummaryRanges();
- * obj->addNum(val);
- * vector<vector<int>> param_2 = obj->getIntervals();
- */
-
-/**
- * Your SummaryRanges object will be instantiated and called as such:
- * SummaryRanges* obj = new SummaryRanges();
- * obj->addNum(val);
- * vector<vector<int>> param_2 = obj->getIntervals();
  * Your SummaryRanges object will be instantiated and called as such:
  * SummaryRanges* obj = new SummaryRanges();
  * obj->addNum(val);
