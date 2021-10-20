@@ -3,63 +3,100 @@
 #include <numeric>
 #include <limits>
 #include "unordered_map"
+#include "sys/socket.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <arpa/inet.h>
+#include <sys/socket.h>
+#include <pthread.h>
+
 
 using namespace std;
 
-class Solution {
+class Trie {
 public:
-    vector<vector<int>> cache;
-    int n;
-    int mod = 1000000007;
+    struct TrieNode{
+        bool end;
+        TrieNode* tns[26];
+        TrieNode(){end = false;}
+    };
+    TrieNode* tn;
 public:
-    int countRoutes(vector<int> &locations, int start, int finish, int fuel) {
-        n = locations.size();
-        cache.resize(n, vector<int>(fuel + 1, -1));
-        return dfs(locations, start, finish, fuel);
+    Trie() {
+        tn = new TrieNode();
     }
 
-    int dfs(vector<int> &locations, int start, int end, int fuel) {
+    void insert(string w) {
+        TrieNode* temp = tn;
+        int i;
+        for(char c : w){
+            i = c - 'a';
+            if(temp->tns[i] == nullptr) temp->tns[i] = new TrieNode();
+            temp = temp->tns[i];
+        }
+        temp->end = true;
+    }
 
-        if (cache[start][fuel] != -1) {
-            return cache[start][fuel];
+    bool search(string w) {
+        TrieNode* temp = tn;
+        int i;
+        for(char c : w){
+            i = c - 'a';
+            if(temp->tns[i] == nullptr) return false;
+            temp = temp->tns[i];
         }
+        return temp->end == true;
+    }
 
-        if (fuel == 0 && start != end) {
-            cache[start][fuel] = 0;
-            return 0;
+    bool startsWith(string w) {
+        TrieNode* temp = tn;
+        int i;
+        for(char c : w){
+            i = c - 'a';
+            if(temp->tns[i] == nullptr) return false;
+            temp = temp->tns[i];
         }
-        bool signal = false;
-        for (int i = 0; i < n; i++) {
-            if (fuel >= locations[i]) {
-                signal = true;
-                break;
-            }
-        }
-        if (!signal) {
-            int a = cache[start][fuel] = start == end ? 1 : 0;
-            return a;
-        }
-
-        int res = start == end ? 1 : 0;
-        for(int i = 0; i < n; i++){
-            if(i == start) continue;
-            int need = abs(locations[start] - locations[i]);
-            if (fuel - need < 0) continue;
-            res += dfs(locations, i, end, fuel - need);
-            res %= mod;
-        }
-        cache[start][fuel] = res;
-        return res;
+        return true;
     }
 };
 
-int main() {
-    Solution s;
-}
-/*
-[1,0,1,1]
-2
-[10,2,5]
-[10,9,5]
+/**
+ * Your Trie object will be instantiated and called as such:
+ * Trie* obj = new Trie();
+ * obj->insert(word);
+ * bool param_2 = obj->search(word);
+ * bool param_3 = obj->startsWith(prefix);
+ */
+/**
+ * Your WordDictionary object will be instantiated and called as such:
+ * WordDictionary* obj = new WordDictionary();
+ * obj->addWord(word);
+ * bool param_2 = obj->search(word);
+ */
 
-*/
+#include<iostream>
+#include<vector>
+#include<string>
+using namespace std;
+//第一个只出现一次的字符
+char firstUniqChar(string s) {
+    int* array = new int[26];
+
+    for (char temp : s) {
+        array[temp - 'a']++;
+    }
+    for (char res : s) {
+        if (array[res - 'a'] == 1)
+            return res;
+    }
+    return ' ';
+}
+
+int main(){
+    string s;
+    cin >> s;
+    cout << firstUniqChar(s) << endl;
+}
+//用例：leetcode
